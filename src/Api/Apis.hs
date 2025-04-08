@@ -1,4 +1,5 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE TypeOperators #-}
 
@@ -6,6 +7,7 @@ module Api.Apis (AccountApi, UserApi, LoginRequest, RegisterRequest (email), MeR
 
 import Data.Aeson (FromJSON, ToJSON)
 import qualified Data.Text as T
+import Database.PostgreSQL.Simple (ToRow)
 import GHC.Generics (Generic)
 import Servant.API
     ( Get,
@@ -30,7 +32,7 @@ data RegisterRequest = RegisterRequest
     , username :: T.Text
     , password :: T.Text
     }
-    deriving (Show, Generic)
+    deriving (Show, Generic, ToRow)
 
 instance FromJSON RegisterRequest
 

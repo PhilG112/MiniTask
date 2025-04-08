@@ -37,12 +37,12 @@ executable MiniTask
 
 library
     import: common-options
-    exposed-modules: Api.Apis
+    exposed-modules: Api.Apis, Db.Pgsql
     hs-source-dirs: src
     build-depends:    servant-auth-server 
                     , bcrypt
                     , postgresql-simple
-                    , async 
+                    , async
 
 test-suite test
     import: common-options

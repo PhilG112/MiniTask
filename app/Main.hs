@@ -12,6 +12,7 @@ import Api.Apis
 import Control.Monad.IO.Class (MonadIO (liftIO))
 import qualified Data.ByteString.Char8 as BS
 import qualified Data.Text as T
+import Db.Pgsql (getTest)
 import Network.Wai
     ( Application,
       Middleware,
@@ -39,7 +40,8 @@ registerHandler registerReq = do
 
 logoutHandler :: Maybe T.Text -> Handler NoContent
 logoutHandler mReturnUrl = do
-    liftIO $ putStrLn $ "Logging out. Redirect to: " ++ show mReturnUrl
+    r <- liftIO $ getTest
+    liftIO $ putStrLn $ "Logging out. Redirect to: " ++ show mReturnUrl ++ show r
     return NoContent
 
 meHandler :: Handler MeResponse
